@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './assistant-page.component.html',
 })
-export class AssistantPageComponent {
+export default class AssistantPageComponent {
 
 }

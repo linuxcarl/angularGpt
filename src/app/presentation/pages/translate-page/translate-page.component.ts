@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './translate-page.component.html',
   styleUrl: './translate-page.component.css'
 })
-export class TranslatePageComponent {
+export default class TranslatePageComponent {
 
 }

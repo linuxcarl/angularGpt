@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './pros-const-page.component.html',
   styleUrl: './pros-const-page.component.css'
 })
-export class ProsConstPageComponent {
+export default class ProsConstPageComponent {
 
 }
