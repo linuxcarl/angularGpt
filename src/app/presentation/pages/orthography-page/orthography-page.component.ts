@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GptMessagesComponent, MyMessagesComponent, TypingLoaderComponent } from '@components/index';
+import { GptMessagesComponent, MyMessagesComponent, TextMessageBoxComponent, TypingLoaderComponent } from '@components/index';
 
 @Component({
   selector: 'app-orthography-page',
@@ -7,7 +7,8 @@ import { GptMessagesComponent, MyMessagesComponent, TypingLoaderComponent } from
   imports: [
     GptMessagesComponent,
     MyMessagesComponent,
-    TypingLoaderComponent
+    TypingLoaderComponent,
+    TextMessageBoxComponent
   ],
   templateUrl: './orthography-page.component.html'
 })

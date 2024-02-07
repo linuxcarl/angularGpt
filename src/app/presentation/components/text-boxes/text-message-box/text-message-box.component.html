@@ -1,0 +1,19 @@
+<form 
+    [formGroup]="form"
+    (ngSubmit)="handleSubmit()"
+class="flex flex-row items-center h-16 rounded-xl w-full px-4 bg-white">
+    <div class="flex-grow">
+        <div class="ralative w-full">
+            <input type="text" autofocus  class=" flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10 text-black"
+                [placeholder]="plahaceholder"
+                formControlName="prompt"
+            >
+        </div>
+    </div>
+    <div class="ml-4">
+        <button class="btn-primary" type="submit">
+            <span class="mr-2">Enviar</span>
+            <i class="fa-regular fa-paper-plane"></i>
+        </button>
+    </div>
+</form>
