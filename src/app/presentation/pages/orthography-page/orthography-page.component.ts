@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { GptMessagesComponent } from '../../components/chat-bubbles/gpt-messages/gpt-messages.component';
-import { MyMessagesComponent } from '../../components/chat-bubbles/my-messages/my-messages.component';
+import { GptMessagesComponent, MyMessagesComponent, TypingLoaderComponent } from '@components/index';
 
 @Component({
   selector: 'app-orthography-page',
   standalone: true,
   imports: [
     GptMessagesComponent,
-    MyMessagesComponent
+    MyMessagesComponent,
+    TypingLoaderComponent
   ],
   templateUrl: './orthography-page.component.html'
 })
