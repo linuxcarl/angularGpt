@@ -2,6 +2,13 @@
     [formGroup]="form"
     (ngSubmit)="handleSubmit()"
 class="flex flex-row items-center h-16 rounded-xl w-full px-4 bg-white">
+    <div class="mr-3">
+        <button (click)="fileInput.click()" class="flex items-center justify-center text-gray-400 ">
+            <i class="fa-solid fa-paperclip text-xl"></i>
+        </button>
+        <input type="file" #fileInput hidden
+        (change)="handleSelectFile($event)">
+    </div>
     <div class="flex-grow">
         <div class="ralative w-full">
             <input type="text" autofocus  class=" flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10 text-black"
@@ -10,6 +17,7 @@ class="flex flex-row items-center h-16 rounded-xl w-full px-4 bg-white">
                 [autocomplete]="disabledCorrection ?'on':'off'"
                 [spellcheck]="disabledCorrection ?'on':'off'"
             >
+           
         </div>
     </div>
     <div class="ml-4">

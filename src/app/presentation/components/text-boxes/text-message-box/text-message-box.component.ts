@@ -10,7 +10,6 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
     ReactiveFormsModule
   ],
   templateUrl: './text-message-box.component.html',
-  styleUrl: './text-message-box.component.css'
 })
 export class TextMessageBoxComponent {
   @Input() public plahaceholder: string =''

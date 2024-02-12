@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GptMessagesComponent, MyMessagesComponent, TextMessageBoxComponent, TypingLoaderComponent } from '@components/index';
+import { GptMessagesComponent, MyMessagesComponent, TextMessageBoxComponent, TextMessageBoxFileComponent, TextMessageBoxFileEvent, TypingLoaderComponent } from '@components/index';
 
 @Component({
   selector: 'app-orthography-page',
@@ -8,10 +8,17 @@ import { GptMessagesComponent, MyMessagesComponent, TextMessageBoxComponent, Typ
     GptMessagesComponent,
     MyMessagesComponent,
     TypingLoaderComponent,
-    TextMessageBoxComponent
+    TextMessageBoxComponent,
+    TextMessageBoxFileComponent
   ],
   templateUrl: './orthography-page.component.html'
 })
 export default class OrthographyPageComponent {
-
+  handleMessage(message: string){
+    console.log('Handled message:', message)
+  }
+  handleMessageWithFile({prompt, file}: TextMessageBoxFileEvent){
+    console.log('Handled message with file:', prompt, file);
+  }
+  
 }

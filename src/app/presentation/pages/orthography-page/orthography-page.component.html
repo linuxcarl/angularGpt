@@ -11,5 +11,12 @@
             <app-typing-loader/>
         </div>
     </div>
-    <app-text-message-box/>
+    <!--
+    <app-text-message-box
+    plahaceholder="Escribe tu mensaje..."
+    (onMessage)="handleMessage($event)"/>
+    -->
+    <app-text-message-box-file
+    plahaceholder="Escribe tu mensaje..."
+    (onMessage)="handleMessageWithFile($event)"/>
 </div>
