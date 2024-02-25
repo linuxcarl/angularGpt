@@ -5,7 +5,13 @@
             <app-gpt-messages text="Escribe el texto que quieres que revise el corrector ortográfico" />
             @for (message of messages(); track $index) {
                 @if(message.isGpt){
-                    <app-gpt-messages [text]="message.text"/>
+                    <!--<app-gpt-messages [text]="message.text"/>-->
+                    <app-gpt-message-orthography 
+                        [text]="message.text" 
+                        [userScore]="message.info!.userScore" 
+                        [errors]="message.info!.errors" 
+                        [hasDude]="message.info!.hasDude ?? false"
+                        [corrections]="message.info!.corrections"/>
                 }@else{
                     <app-my-messages [text]="message.text"/>
                 }
@@ -15,21 +21,7 @@
             }
         </div>
     </div>
-    <!--
     <app-text-message-box
     plahaceholder="Escribe tu mensaje..."
     (onMessage)="handleMessage($event)"/>
-    -->
-    <!--
-    <app-text-message-box-file
-    plahaceholder="Escribe tu mensaje..."
-    (onMessage)="handleMessageWithFile($event)"/>
-    -->
-    <app-text-message-box-select plahaceholder="Escribe tu mensaje..." [options]="[{
-        id: '1',
-        name: 'Opción 1'
-    },{
-        id: '2',
-        name: 'Opción 2'
-    }]" (onMessage)="handleMessageWithSelect($event)" />
 </div>

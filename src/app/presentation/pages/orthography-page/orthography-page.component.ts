@@ -1,6 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
-import { GptMessagesComponent, MyMessagesComponent, TextMessageBoxComponent, TextMessageBoxFileComponent, TextMessageBoxFileEvent, TextMessageBoxSelectComponent, TextMessageBoxEvent, TypingLoaderComponent } from '@components/index';
-import { Message } from '@interfaces/messages.interface';
+import {
+  GptMessagesComponent,
+  MyMessagesComponent,
+  TextMessageBoxComponent,
+  TextMessageBoxFileComponent,
+  TextMessageBoxFileEvent,
+  TextMessageBoxSelectComponent,
+  TextMessageBoxEvent,
+  TypingLoaderComponent,
+  GptMessageOrthographyComponent,
+} from '@components/index';
+import type { Message } from '@interfaces/messages.interface';
 import { OpenAiService } from '../../services/openai.services';
 
 @Component({
@@ -8,27 +18,43 @@ import { OpenAiService } from '../../services/openai.services';
   standalone: true,
   imports: [
     GptMessagesComponent,
+    GptMessageOrthographyComponent,
     MyMessagesComponent,
     TypingLoaderComponent,
     TextMessageBoxComponent,
     TextMessageBoxFileComponent,
-    TextMessageBoxSelectComponent
+    TextMessageBoxSelectComponent,
   ],
-  templateUrl: './orthography-page.component.html'
+  templateUrl: './orthography-page.component.html',
 })
 export default class OrthographyPageComponent {
-  public messages = signal<Message[]>([{text: 'Hola como estas?', isGpt: false}, {text: 'hi soy tu sensei de gpt', isGpt: true}])
-  public isLoanding = signal<boolean>(false)
-  public openAiService= inject(OpenAiService)
-  
-  handleMessage(message: string){
-    console.log('Handled message:', message)
-  }
-  handleMessageWithFile({prompt, file}: TextMessageBoxFileEvent){
-    console.log('Handled message with file:', prompt, file);
-  }
+  public messages = signal<Message[]>([]);
+  public isLoanding = signal<boolean>(false);
+  public openAiService = inject(OpenAiService);
 
-  handleMessageWithSelect(event: TextMessageBoxEvent){
-    console.log('Handled message with file:', event);
+  handleMessage(message: string) {
+    console.log('Handled message:', message);
+    this.isLoanding.set(true); // Remove the argument from the function call
+    this.messages.update((prev) => [
+      ...prev,
+      {
+        text: message,
+        isGpt: false,
+      },
+    ]);
+    this.openAiService.checkOrthography(message).subscribe((res)=>{
+      this.isLoanding.set(false)
+     // const {message,errors,corrections,userScore} = res
+      console.log('Response:', res, message);
+      this.messages.update((prev)=> [
+        ...prev,
+        {
+          text: res.message as string,
+          isGpt: true,
+          info: res as unknown as  Message['info'] // Explicitly type 'info' as Message['info']
+        }
+      ])
+
+    })
   }
- }
+}
