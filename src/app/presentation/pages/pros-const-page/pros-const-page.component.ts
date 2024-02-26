@@ -5,7 +5,6 @@ import {
   TypingLoaderComponent,
   TextMessageBoxComponent,
 } from '@components/index';
-import { prosConsResponse } from '@interfaces/index';
 import { Message } from '@interfaces/messages.interface';
 import { OpenAiService } from 'app/presentation/services/openai.services';
 
@@ -26,7 +25,6 @@ export default class ProsConstPageComponent {
   public openAiService = inject(OpenAiService);
 
   handleMessage(message: string) {
-    console.log('Handled message:', message);
     this.isLoanding.set(true); // Remove the argument from the function call
     this.messages.update((prev) => [
       ...prev,
@@ -37,7 +35,6 @@ export default class ProsConstPageComponent {
     ]);
     this.openAiService.prosCons(message).subscribe((res) => {
       this.isLoanding.set(false);
-      console.log('Response:', res, message);
       this.messages.update((prev) => [
         ...prev,
         {
