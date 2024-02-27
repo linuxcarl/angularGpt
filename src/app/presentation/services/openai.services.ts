@@ -4,6 +4,7 @@ import {
   orthographyCase,
   prosConsCase,
   prosConsStreamCase,
+  translateUseCase,
 } from '@use-cases/index';
 import { Observable, from } from 'rxjs';
 
@@ -17,5 +18,8 @@ export class OpenAiService {
   }
   prosConsStream(prompt: string, abortSignal: AbortSignal) {
     return prosConsStreamCase(prompt, abortSignal);
+  }
+  translate(promt: string, lang: string) {
+    return from(translateUseCase(promt, lang));
   }
 }
