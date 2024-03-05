@@ -4,12 +4,16 @@ import {
   orthographyCase,
   prosConsCase,
   prosConsStreamCase,
+  textToAudioUseCase,
   translateUseCase,
 } from '@use-cases/index';
 import { Observable, from } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class OpenAiService {
+  translateUseCase(message: string, lang: String) {
+    throw new Error('Method not implemented.');
+  }
   checkOrthography(prompt: string) {
     return from(orthographyCase(prompt));
   }
@@ -21,5 +25,8 @@ export class OpenAiService {
   }
   translate(promt: string, lang: string) {
     return from(translateUseCase(promt, lang));
+  }
+  textToAudio(promt: string, voice: string) {
+    return from(textToAudioUseCase(promt, voice));
   }
 }

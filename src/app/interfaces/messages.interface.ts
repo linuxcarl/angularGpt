@@ -8,4 +8,5 @@ export interface Message {
     corrections: string;
     hasDude?: boolean;
   };
+  audioUrl?: string;
 }
