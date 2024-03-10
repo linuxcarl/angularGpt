@@ -1,1 +1,20 @@
-<p>audio-to-text-page works!</p>
+<div class="chat-container">
+    <div class="chat-messages">
+        <div class="grid gap-y-2">
+            <!--CHAT MESSAGES-->
+            <app-gpt-messages text="Carga el audio para recibir el texto" />
+            @for (message of messages(); track $index) {
+            @if(message.isGpt){
+            <app-gpt-messages [text]="message.text" />
+            }@else{
+            <app-my-messages [text]="message.text" />
+            }
+            }
+            @if(isLoanding()){
+            <app-typing-loader />
+            }
+        </div>
+    </div>
+    <app-text-message-box-file plahaceholder="Escribe tu como necesitas el texto..."
+        (onMessage)="handleMessageWithFile($event)" />
+</div>
