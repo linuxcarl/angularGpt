@@ -9,9 +9,9 @@
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">En base a esta imagen se va a generar una
             variación.</p>
         <div class="flex items-center justify-between">
-            <button (click)="generateVariation()" class="btn-primary mt-2 mr-5">
+            <!--<button (click)="generateVariation()" class="btn-primary mt-2 mr-5">
                 Generar variación
-            </button>
+            </button>-->
             <button (click)="close()" class="btn-secundary mt-2">
                 Cerrar
             </button>
@@ -27,7 +27,7 @@
             @for (message of messages(); track $index) {
             @if(message.isGpt){
             <app-gpt-message-editable-image [text]="message.text" [imageInfo]="message.imageInfo!"
-                (onSelectedImage)="handleImageChange($event, message.imageInfo!.url)" />
+                (onSelectedImage)="handleImageChange($event, message.imageInfo!.url )" />
             }@else{
             <app-my-messages [text]="message.text" />
             }

@@ -26,33 +26,29 @@ export default class ImageTunningPageComponent {
   public isLoanding = signal<boolean>(false);
   public openAiService = inject(OpenAiService);
   public baseImage = signal<string | undefined>(undefined);
-
+  public maskImage = signal<string | undefined>(undefined);
   handleMessage(message: string) {
     this.isLoanding.set(true);
     this.messages.update((prev) => [...prev, { text: message, isGpt: false }]);
-    this.openAiService.generetedImage(message).subscribe((resp) => {
-      if (!resp) return false;
-      this.messages.update((prev) => [
-        ...prev,
-        {
-          isGpt: true,
-          text: resp.alt,
-          imageInfo: resp,
-        },
-      ]);
-      this.isLoanding.set(false);
-      return true;
-    });
+    this.openAiService
+      .generetedImage(message, this.baseImage(), this.maskImage())
+      .subscribe((resp) => {
+        if (!resp) return false;
+        this.messages.update((prev) => [
+          ...prev,
+          {
+            isGpt: true,
+            text: resp.alt,
+            imageInfo: resp,
+          },
+        ]);
+        this.isLoanding.set(false);
+        return true;
+      });
   }
   handleImageChange(newImage: string, originalImage: string) {
-    this.baseImage.set(newImage);
-    console.log(
-      'newImage=>',
-      newImage,
-      'originalImage=>',
-      originalImage,
-      this.baseImage
-    );
+    this.baseImage.set(originalImage);
+    this.maskImage.set(newImage);
   }
   generateVariation() {}
   close() {
