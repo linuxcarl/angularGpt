@@ -9,4 +9,8 @@ export interface Message {
     hasDude?: boolean;
   };
   audioUrl?: string;
+  imageInfo?: {
+    url: string;
+    alt: string;
+  };
 }

@@ -43,9 +43,7 @@ export default class AudioToTextPageComponent {
     if (!res) return;
     const text = `Transcription
     __Duration: ${Math.round(res.duration)} sec__
-    
     The Text is:
-    
   ${res.text}`;
     this.messages.update((prev) => [...prev, { text, isGpt: true }]);
 
@@ -54,7 +52,6 @@ export default class AudioToTextPageComponent {
       __From ${Math.round(segment.start)} to ${Math.round(
         segment.end
       )}__ seconds
-      
       ${segment.text}`;
       this.messages.update((prev) => [
         ...prev,
