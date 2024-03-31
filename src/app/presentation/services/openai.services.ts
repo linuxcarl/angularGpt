@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { prosConsResponse } from '@interfaces/pros-cons.response';
 import {
   audioToTextUseCase,
+  createThreadUseCase,
   imageGenerationUseCase,
   orthographyCase,
   prosConsCase,
@@ -9,7 +10,7 @@ import {
   textToAudioUseCase,
   translateUseCase,
 } from '@use-cases/index';
-import { Observable, from } from 'rxjs';
+import { Observable, from, of, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class OpenAiService {
@@ -37,5 +38,20 @@ export class OpenAiService {
 
   generetedImage(prompt: string, baseImage?: string, maskImage?: string) {
     return from(imageGenerationUseCase(prompt, baseImage, maskImage));
+  }
+
+  createThread(): Observable<string> {
+    if (
+      localStorage.getItem('thread') &&
+      localStorage.getItem('thread') !== 'undefined'
+    ) {
+      return of(localStorage.getItem('thread')!);
+    }
+
+    return from(createThreadUseCase()).pipe(
+      tap((thread) => {
+        localStorage.setItem('thread', thread);
+      })
+    );
   }
 }
